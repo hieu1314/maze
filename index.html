@@ -193,6 +193,63 @@ canvas {
     margin-top: 50px;  /* Khoảng cách giữa canvas và timer */
     z-index: 1;  /* Đảm bảo canvas không bị che */
 }
+/* ===== GAME OVER SCREEN ===== */
+#gameOverScreen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: black;
+    animation: fadeIn 1.2s ease forwards;
+}
+
+#gameOverScreen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: black;
+    filter: brightness(0.6) contrast(1.2);
+}
+
+/* GAME OVER TEXT */
+#gameOverText {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    color: #ff2222;
+    letter-spacing: 8px;
+    text-shadow:
+        0 0 10px #ff0000,
+        0 0 25px #ff0000,
+        0 0 40px #000;
+    animation:
+        glitch 0.15s infinite alternate,
+        blink 1.2s infinite;
+}
+
+/* Fade in background */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Blink text */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Shake / glitch */
+@keyframes glitch {
+    0%   { transform: translate(-50%, -50%) translate(0,0); }
+    25%  { transform: translate(-50%, -50%) translate(-2px,1px); }
+    50%  { transform: translate(-50%, -50%) translate(2px,-1px); }
+    75%  { transform: translate(-50%, -50%) translate(-1px,-2px); }
+    100% { transform: translate(-50%, -50%) translate(1px,2px); }
+}
 
     </style>
     </head>
@@ -235,6 +292,11 @@ canvas {
   </div>
 
   <button id="undoBtn">⟳</button>
+</div>
+<!-- Game Over Screen -->
+<div id="gameOverScreen">
+    <img src="pi.jpg" alt="Game Over">
+    <div id="gameOverText">GAME OVER</div>
 </div>
 
     <script>
@@ -1564,15 +1626,15 @@ function showEndMessage(){
     revealAll = true;
     drawMaze();
 
-    document.getElementById("loseMessage").style.display = "block";
+    const gameOver = document.getElementById("gameOverScreen");
+    gameOver.style.display = "block";
 
     setTimeout(()=>{
-        document.getElementById("loseMessage").style.display = "none";
+        gameOver.style.display = "none";
         revealAll = false;
         resetGame();
     },15000);
 }
-
 
  /* ===== MOBILE TOUCH CONTROL ===== */
 let touchStartX = 0, touchStartY = 0;
