@@ -153,30 +153,33 @@ canvas {
     background-color: #555;
 }
 
-/* Ẩn các điều khiển trên PC */
+/* PC: chỉ hiện Undo, ẩn D-pad */
 @media (min-width: 769px) {
     #controls {
-        display: none;  /* Ẩn điều khiển trên PC */
-    }
-
-    /* Chỉ hiển thị nút Undo trên PC */
-    #undoBtn {
-        display: flex;
-    }
-}
-
-/* Hiển thị đầy đủ điều khiển (Undo + Dpad) trên Mobile */
-@media (max-width: 768px) {
-    #controls {
-        display: flex;  /* Hiển thị điều khiển trên mobile */
-    }
-
-    #undoBtn {
-        display: block;  /* Hiển thị nút Undo */
+        display: flex;   /* vẫn hiện */
     }
 
     #dpad {
-        display: grid;  /* Hiển thị dpad (4 nút di chuyển) */
+        display: none;   /* ẩn phím di chuyển */
+    }
+
+    #undoBtn {
+        display: block;  /* hiện Undo */
+    }
+}
+
+/* Mobile: hiện cả Undo + D-pad */
+@media (max-width: 768px) {
+    #controls {
+        display: flex;
+    }
+
+    #dpad {
+        display: grid;
+    }
+
+    #undoBtn {
+        display: block;
     }
 }
 
