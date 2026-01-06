@@ -295,8 +295,8 @@ canvas {
     const canvas = document.getElementById("mazeCanvas");
     const ctx = canvas.getContext("2d");
 
-    const ROWS = 33;
-    const COLS = 33;
+    const ROWS = 39;
+    const COLS = 39;
     const TILE = 24;
     canvas.width = COLS * TILE;
     canvas.height = ROWS * TILE;
@@ -406,7 +406,7 @@ if (mainPath.length >= 6) {
 
         // ✅ Tránh nối quá gần exit
         let distToExit = Math.abs(p.x - exit.x) + Math.abs(p.y - exit.y);
-        if (distToExit < 6) continue; 
+        if (distToExit < 10) continue; 
 
         // Tìm ô nhánh giả dead-end xung quanh
         let neighbors = shuffle([[0,-1],[1,0],[0,1],[-1,0]]);
